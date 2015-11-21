@@ -24,3 +24,4 @@ include(../RibiClasses/CppQtLedWidget/CppQtLedWidget.pri)
 include(TestLedDesktop.pri)
 
 SOURCES += qtmain.cpp
+

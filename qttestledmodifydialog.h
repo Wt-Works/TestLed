@@ -6,8 +6,6 @@
 #pragma GCC diagnostic ignored "-Wunused-local-typedefs"
 #pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
 #include "qthideandshowdialog.h"
-
-#include <boost/shared_ptr.hpp>
 #pragma GCC diagnostic pop
 
 namespace Ui {
@@ -29,13 +27,19 @@ public:
   QtTestLedModifyDialog& operator=(const QtTestLedModifyDialog&) = delete;
   ~QtTestLedModifyDialog() noexcept;
 
+  QtLedDialog * GetQtDialog() const noexcept { return m_qtleddialog; }
+  QtLed * GetQtLed() const noexcept { return m_qtled; }
+
 private:
   Ui::QtTestLedModifyDialog *ui;
 
-  boost::shared_ptr<QtLedDialog> m_dialog_left;
-  boost::shared_ptr<QtLedDialog> m_dialog_right;
-  boost::shared_ptr<QtLed> m_led_left;
-  boost::shared_ptr<QtLed> m_led_right;
+  QtLedDialog * const m_qtleddialog;
+  QtLed * const m_qtled;
+
+  #ifndef NDEBUG
+  static void Test() noexcept;
+  #endif
+
 };
 
 } //~namespace ribi

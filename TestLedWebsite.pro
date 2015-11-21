@@ -1,57 +1,23 @@
-QT       += core
-QT       -= gui
-LIBS += -lwt -lwthttp -lboost_program_options
-CONFIG   += console
-CONFIG   -= app_bundle
-TEMPLATE = app
+include(../RibiLibraries/WebApplication.pri)
+include(../RibiLibraries/Apfloat.pri)
+include(../RibiLibraries/BoostAll.pri)
+include(../RibiLibraries/Wt.pri)
+include(../RibiLibraries/GeneralConsole.pri)
+include(../RibiLibraries/GeneralWeb.pri)
 
-INCLUDEPATH += \
-    ../../Classes/CppAbout \
-    ../../Classes/CppDial \
-    ../../Classes/CppDialWidget \
-    ../../Classes/CppLed \
-    ../../Classes/CppLedWidget \
-    ../../Classes/CppRainbow \
-    ../../Classes/CppRectangle \
-    ../../Classes/CppWtAboutDialog \
-    ../../Classes/CppWtAutoConfig \
-    ../../Classes/CppWtLedWidget \
-    ../../Classes/CppWtDialWidget \
-    ../../Classes/CppWidget
+#Specific, console
+include(../RibiClasses/CppCanvas/CppCanvas.pri)
+include(../RibiClasses/CppContainer/CppContainer.pri)
+include(../RibiClasses/CppDotMatrix/CppDotMatrix.pri)
+include(../RibiClasses/CppFuzzy_equal_to/CppFuzzy_equal_to.pri)
+include(../RibiClasses/CppGeometry/CppGeometry.pri)
+include(../RibiClasses/CppLed/CppLed.pri)
+include(../RibiClasses/CppLedWidget/CppLedWidget.pri)
+include(../RibiClasses/CppPlane/CppPlane.pri)
+include(../RibiClasses/CppRibiRegex/CppRibiRegex.pri)
+include(../RibiClasses/CppTextCanvas/CppTextCanvas.pri)
+include(../RibiClasses/CppWidget/CppWidget.pri)
 
-SOURCES += wtmain.cpp \
-    ../../Classes/CppAbout/about.cpp \
-    ../../Classes/CppDial/dial.cpp \
-    ../../Classes/CppLed/led.cpp \
-    ../../Classes/CppWtAboutDialog/wtaboutdialog.cpp \
-    ../../Classes/CppWtDialWidget/wtdialwidget.cpp \
-    ../../Classes/CppWtLedWidget/wtledwidget.cpp \
-    testledmenudialog.cpp \
-    wttestledmaindialog.cpp \
-    ../../Classes/CppWtAutoConfig/wtautoconfig.cpp \
-    wttestledmenudialog.cpp \
-    ../../Classes/CppDialWidget/dialwidget.cpp \
-    ../../Classes/CppWidget/widget.cpp \
-    ../../Classes/CppRectangle/rectangle.cpp \
-    ../../Classes/CppLedWidget/ledwidget.cpp \
-    ../../Classes/CppRainbow/rainbow.cpp
+include(../TestLed/TestLedWebsite.pri)
 
-HEADERS  += \
-    ../../Classes/CppAbout/about.h \
-    ../../Classes/CppDial/dial.h \
-    ../../Classes/CppLed/led.h \
-    ../../Classes/CppWtAboutDialog/wtaboutdialog.h \
-    ../../Classes/CppWtDialWidget/wtdialwidget.h \
-    ../../Classes/CppWtLedWidget/wtledwidget.h \
-    testledmenudialog.h \
-    wttestledmaindialog.h \
-    ../../Classes/CppWtAutoConfig/wtautoconfig.h \
-    wttestledmenudialog.h \
-    ../../Classes/CppDialWidget/dialwidget.h \
-    ../../Classes/CppWidget/widget.h \
-    ../../Classes/CppRectangle/rectangle.h \
-    ../../Classes/CppLedWidget/ledwidget.h \
-    ../../Classes/CppRainbow/rainbow.h
-
-RESOURCES += \
-    ToolTestLed.qrc
+SOURCES += wtmain.cpp

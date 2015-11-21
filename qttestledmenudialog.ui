@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>393</width>
-    <height>253</height>
+    <width>344</width>
+    <height>315</height>
    </rect>
   </property>
   <property name="font">
@@ -42,7 +42,7 @@ QPlainTextEdit { font: 10px }
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="ToolTestLed.qrc">:/ToolTestLed/images/ToolTestLedModify.png</pixmap>
+      <pixmap resource="TestLed.qrc">:/ToolTestLed/images/TestLedModify.png</pixmap>
      </property>
     </widget>
    </item>
@@ -65,7 +65,7 @@ QPlainTextEdit { font: 10px }
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="ToolTestLed.qrc">:/ToolTestLed/images/ToolTestLedCompare.png</pixmap>
+      <pixmap resource="TestLed.qrc">:/ToolTestLed/images/TestLedCompare.png</pixmap>
      </property>
     </widget>
    </item>
@@ -111,7 +111,7 @@ QPlainTextEdit { font: 10px }
   </layout>
  </widget>
  <resources>
-  <include location="ToolTestLed.qrc"/>
+  <include location="TestLed.qrc"/>
  </resources>
  <connections/>
 </ui>

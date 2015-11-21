@@ -11,19 +11,20 @@
 #include "led.h"
 #include "qtled.h"
 #include "qtleddialog.h"
-
+#include "testtimer.h"
 #include "ui_qttestledmodifydialog.h"
 #pragma GCC diagnostic pop
 
 ribi::QtTestLedModifyDialog::QtTestLedModifyDialog(QWidget *parent)
   : QtHideAndShowDialog(parent),
     ui(new Ui::QtTestLedModifyDialog),
-    m_dialog_left(boost::make_shared<QtLedDialog>()),
-    m_dialog_right(boost::make_shared<QtLedDialog>()),
-    m_led_left(boost::make_shared<QtLed>()),
-    m_led_right(boost::make_shared<QtLed>())
-
+    m_qtleddialog(new QtLedDialog(this)),
+    m_qtled(new QtLed(0.0,255,0,0,this))
 {
+  #ifndef NDEBUG
+  Test();
+  #endif
+
   ui->setupUi(this);
 
   {
@@ -32,7 +33,7 @@ ribi::QtTestLedModifyDialog::QtTestLedModifyDialog(QWidget *parent)
     assert(my_layout);
     ui->widget_left->setLayout(my_layout);
     assert(ui->widget_left->layout());
-    my_layout->addWidget(m_led_left.get());
+    my_layout->addWidget(m_qtled);
   }
   {
     assert(!ui->widget_right->layout());
@@ -40,24 +41,50 @@ ribi::QtTestLedModifyDialog::QtTestLedModifyDialog(QWidget *parent)
     assert(my_layout);
     ui->widget_right->setLayout(my_layout);
     assert(ui->widget_right->layout());
-    my_layout->addWidget(m_led_right.get());
-  }
-  {
-    assert(this->layout());
-    auto my_layout = this->layout();
-    my_layout->addWidget(m_dialog_left.get());
-    my_layout->addWidget(m_dialog_right.get());
+    ui->widget_right->layout()->addWidget(m_qtleddialog);
   }
 
-  const auto led = boost::make_shared<Led>();
-  m_dialog_left->SetLed(led);
-  m_dialog_right->SetLed(led);
-  m_led_left->SetLed(led);
-  m_led_right->SetLed(led);
+  const Led led;
+  m_qtleddialog->SetLed(led);
+  m_qtled->SetLed(led);
 
+  QObject::connect(
+    m_qtleddialog,SIGNAL(on_led_changed(Led)),
+    m_qtled,SLOT(SetLed(Led))
+  );
 }
 
 ribi::QtTestLedModifyDialog::~QtTestLedModifyDialog() noexcept
 {
   delete ui;
 }
+
+#ifndef NDEBUG
+void ribi::QtTestLedModifyDialog::Test() noexcept
+{
+  {
+    static bool is_tested{false};
+    if (is_tested) return;
+    is_tested = true;
+  }
+  {
+    QtLed();
+    Led();
+  }
+  const TestTimer test_timer(__func__,__FILE__,1.0);
+  QtTestLedModifyDialog d;
+  #ifdef FIX_ISSUE_1
+  //Dialog must change the LED
+  {
+    const Led led;
+    d.GetQtDialog()->SetLed(led);
+    assert(d.GetQtLed()->GetLed() == led);
+  }
+  {
+    const Led led(0.5,128,128,128);
+    d.GetQtDialog()->SetLed(led);
+    assert(d.GetQtLed()->GetLed() == led);
+  }
+  #endif // FIX_ISSUE_1
+}
+#endif

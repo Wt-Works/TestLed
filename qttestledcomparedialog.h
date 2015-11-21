@@ -57,8 +57,6 @@ protected:
 private:
   Ui::QtTestLedCompareDialog *ui;
 
-  std::vector<boost::shared_ptr<QtLed>> m_v;
-
   #ifndef NDEBUG
   static void Test() noexcept;
   #endif
