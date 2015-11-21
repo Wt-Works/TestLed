@@ -1,4 +1,4 @@
-include(../TestLed/ToolTestLedConsole.pri)
+include(../TestLed/TestLedConsole.pri)
 
 SOURCES += \
     ../TestLed/wttestledmaindialog.cpp \
