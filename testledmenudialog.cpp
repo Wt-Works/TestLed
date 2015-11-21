@@ -87,18 +87,9 @@ ribi::Help ribi::TestLedMenuDialog::GetHelp() const noexcept
   );
 }
 
-boost::shared_ptr<const ribi::Program> ribi::TestLedMenuDialog::GetProgram() const noexcept
-{
-  const boost::shared_ptr<const Program> p {
-    new ProgramTestLed
-  };
-  assert(p);
-  return p;
-}
-
 std::string ribi::TestLedMenuDialog::GetVersion() const noexcept
 {
-  return "1.5";
+  return "2.0";
 }
 
 std::vector<std::string> ribi::TestLedMenuDialog::GetVersionHistory() const noexcept
@@ -109,7 +100,8 @@ std::vector<std::string> ribi::TestLedMenuDialog::GetVersionHistory() const noex
     "2011-07-02: Version 1.2: added menu",
     "2011-09-08: Version 1.3: added Welcome screen picture and increased testing in website version",
     "2013-11-05: version 1.4: conformized for ProjectRichelBilderbeekConsole",
-    "2014-06-25: version 1.5: improved desktop version"
+    "2014-06-25: version 1.5: improved desktop version",
+    "2015-11-21: version 2.0: moved to own GitHub"
   };
 }
 
@@ -122,6 +114,15 @@ void ribi::TestLedMenuDialog::Test() noexcept
     if (is_tested) return;
     is_tested = true;
   }
+  {
+    Led();
+    LedWidget();
+    TextCanvas();
+  }
   const TestTimer test_timer(__func__,__FILE__,1.0);
+  {
+    TestLedMenuDialog d;
+    d.Execute( {"LedMenu"} );
+  }
 }
 #endif
